@@ -1,30 +1,43 @@
+"""
+A permutation is an ordered arrangement of objects. For example, 3124 is one
+possible permutation of the digits 1, 2, 3 and 4. If all of the permutations
+are listed numerically or alphabetically, we call it lexicographic order. The
+lexicographic permutations of 0, 1 and 2 are:
+ 
+012   021   102   120   201   210
+ 
+What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5,
+6, 7, 8 and 9?
+"""
+
 import time
 import math
 duration = time.time()
 
-current = 0
-maxNums = 1000000
-numbers = range(10)
-answer  = []
-stringd = ''
+n = 1000000
 
-while len(numbers) > 0:
-	curIndex = 0
+cur = 0
+num = range(10)
+ans  = []
+lexico  = ''
+
+while len(num) > 0:
+	i = 0
 	found = False
 	while not found:
-		fact = math.factorial(len(numbers)-1)	
-		if fact * (curIndex+1) + current >= maxNums:
-			current = current + curIndex * fact
+		fact = math.factorial(len(num)-1)	
+		if fact * (i+1) + cur >= n:
+			cur += i * fact
 			found = True
-			answer.append(numbers[curIndex])
-			numbers.pop(curIndex)
+			ans.append(num[i])
+			num.pop(i)
 		else:
-			curIndex += 1 
+			i += 1 
 
-for x in answer:
-	stringd += str(x)
+for x in ans:
+	lexico += str(x)
 
 duration = time.time() - duration
 
-print 'Answer: ' + stringd
+print 'Answer: ' + lexico
 print 'Time:   ' + '{:0.2f}'.format(duration) + 's'
